@@ -163,6 +163,7 @@
             this.btnRefresh.TabIndex = 13;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // dgvMahasiswa
             // 
@@ -171,6 +172,7 @@
             this.dgvMahasiswa.Name = "dgvMahasiswa";
             this.dgvMahasiswa.Size = new System.Drawing.Size(649, 150);
             this.dgvMahasiswa.TabIndex = 14;
+            this.dgvMahasiswa.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMahasiswa_CellContentClick);
             // 
             // Form1
             // 
