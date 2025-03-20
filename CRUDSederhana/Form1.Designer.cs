@@ -168,7 +168,7 @@
             this.dgvMahasiswa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMahasiswa.Location = new System.Drawing.Point(80, 275);
             this.dgvMahasiswa.Name = "dgvMahasiswa";
-            this.dgvMahasiswa.Size = new System.Drawing.Size(486, 150);
+            this.dgvMahasiswa.Size = new System.Drawing.Size(649, 150);
             this.dgvMahasiswa.TabIndex = 14;
             // 
             // Form1

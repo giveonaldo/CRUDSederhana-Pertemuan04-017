@@ -13,7 +13,7 @@ namespace CRUDSederhana
 {
     public partial class Form1: Form
     {
-        static string connectionString = "Server=127.0.0.1;Database=Mahasiswa;Uid=root;Pwd=;";
+        static string connectionString = "Server=127.0.0.1;Database=mahasiswa;Uid=root;Pwd=;";
         public Form1()
         {
             InitializeComponent();
@@ -42,8 +42,8 @@ namespace CRUDSederhana
             try
             {
                 conn.Open();
-                string query = "Select NIM, Nama, Email, Telepon, Alamat " +
-                    "from Mahasiswa";
+                string query = "SELECT NIM, Nama, Email, Telepon, Alamat " +
+                    "FROM mahasiswa";
                 MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -80,8 +80,8 @@ namespace CRUDSederhana
                 }
 
                 conn.Open();
-                string query = "insert into (NIM, Nama, Email, Telepon, Alamat)" +
-                    "values (@NIM, @Nama, @Email, @Telepon, @Alamat)";
+                string query = "INSERT INTO mahasiswa (NIM, Nama, Email, Telepon, Alamat) " +
+                       "VALUES (@NIM, @Nama, @Email, @Telepon, @Alamat)";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@NIM", txtNIM.Text);
