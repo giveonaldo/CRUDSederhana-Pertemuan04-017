@@ -38,6 +38,10 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtTelepon = new System.Windows.Forms.TextBox();
             this.txtAlamat = new System.Windows.Forms.TextBox();
+            this.btnTambah = new System.Windows.Forms.Button();
+            this.btnHapus = new System.Windows.Forms.Button();
+            this.btnUbah = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NIM
@@ -120,11 +124,51 @@
             this.txtAlamat.Size = new System.Drawing.Size(282, 20);
             this.txtAlamat.TabIndex = 9;
             // 
+            // btnTambah
+            // 
+            this.btnTambah.Location = new System.Drawing.Point(491, 32);
+            this.btnTambah.Name = "btnTambah";
+            this.btnTambah.Size = new System.Drawing.Size(75, 23);
+            this.btnTambah.TabIndex = 10;
+            this.btnTambah.Text = "Tambah";
+            this.btnTambah.UseVisualStyleBackColor = true;
+            // 
+            // btnHapus
+            // 
+            this.btnHapus.Location = new System.Drawing.Point(491, 68);
+            this.btnHapus.Name = "btnHapus";
+            this.btnHapus.Size = new System.Drawing.Size(75, 23);
+            this.btnHapus.TabIndex = 11;
+            this.btnHapus.Text = "Hapus";
+            this.btnHapus.UseVisualStyleBackColor = true;
+            // 
+            // btnUbah
+            // 
+            this.btnUbah.Location = new System.Drawing.Point(491, 114);
+            this.btnUbah.Name = "btnUbah";
+            this.btnUbah.Size = new System.Drawing.Size(75, 23);
+            this.btnUbah.TabIndex = 12;
+            this.btnUbah.Text = "Ubah";
+            this.btnUbah.UseVisualStyleBackColor = true;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(491, 161);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 13;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnUbah);
+            this.Controls.Add(this.btnHapus);
+            this.Controls.Add(this.btnTambah);
             this.Controls.Add(this.txtAlamat);
             this.Controls.Add(this.txtTelepon);
             this.Controls.Add(this.txtEmail);
@@ -154,6 +198,10 @@
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtTelepon;
         private System.Windows.Forms.TextBox txtAlamat;
+        private System.Windows.Forms.Button btnTambah;
+        private System.Windows.Forms.Button btnHapus;
+        private System.Windows.Forms.Button btnUbah;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
 
