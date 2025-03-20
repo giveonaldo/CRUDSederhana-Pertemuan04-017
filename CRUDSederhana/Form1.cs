@@ -198,5 +198,99 @@ namespace CRUDSederhana
                 txtAlamat.Text = row.Cells[4].Value.ToString();
             }
         }
+
+        // Method update
+        private void btnUbah_Click(object sender, EventArgs e)
+        {
+            if (dgvMahasiswa.SelectedRows.Count == 0)
+            {
+                MessageBox.Show(
+                    "Pilih data yang akan diubah!", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning
+                    );
+                return;
+            }
+
+            string nim = dgvMahasiswa.SelectedRows[0].Cells["NIM"].Value.ToString();
+
+            if (txtNama.Text == "" && txtEmail.Text == "" && txtTelepon.Text == "" && txtAlamat.Text == "")
+            {
+                MessageBox.Show(
+                    "Tidak ada data yang diubah!", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning
+                    );
+                return;
+            }
+
+            StringBuilder queryBuilder = new StringBuilder("UPDATE mahasiswa SET ");
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
+
+            if (!string.IsNullOrEmpty(txtNama.Text))
+            {
+                queryBuilder.Append("Nama = @Nama, ");
+                parameters.Add(new MySqlParameter("@Nama", txtNama.Text));
+            }
+
+            if (!string.IsNullOrEmpty(txtEmail.Text))
+            {
+                queryBuilder.Append("Email = @Email, ");
+                parameters.Add(new MySqlParameter("@Email", txtEmail.Text));
+            }
+
+            if (!string.IsNullOrEmpty(txtTelepon.Text))
+            {
+                queryBuilder.Append("Telepon = @Telepon, ");
+                parameters.Add(new MySqlParameter("@Telepon", txtTelepon.Text));
+            }
+            
+            if (!string.IsNullOrEmpty(txtAlamat.Text))
+            {
+                queryBuilder.Append("Alamat = @Alamat, ");
+                parameters.Add(new MySqlParameter("@Alamat", txtAlamat.Text));
+            }
+
+            queryBuilder.Remove(queryBuilder.Length - 2, 2);
+
+            queryBuilder.Append(" WHERE NIM = @NIM");
+            parameters.Add(new MySqlParameter("@NIM", nim));
+
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(queryBuilder.ToString(), conn);
+
+                foreach (var param in parameters)
+                {
+                    cmd.Parameters.Add(param);
+                }
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show(
+                        "Data berhasil diubah", "Sukses",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information
+                        );
+                    LoadData();
+                    ClearForm();
+                } else
+                {
+                    MessageBox.Show(
+                        "Data tidak ditemukan atau gagal diubah!", "Kesalahan",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error
+                        );
+                }
+
+            } catch (Exception ex)
+            {
+                MessageBox.Show(
+                   "Error: " + ex.Message, "Kesalahan",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error
+                    );
+            }
+        }
     }
 }
