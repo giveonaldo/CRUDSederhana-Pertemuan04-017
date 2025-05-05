@@ -184,6 +184,7 @@
             this.btnImportData.TabIndex = 15;
             this.btnImportData.Text = "Import Data";
             this.btnImportData.UseVisualStyleBackColor = true;
+            this.btnImportData.Click += new System.EventHandler(this.btnImportData_Click);
             // 
             // Form1
             // 

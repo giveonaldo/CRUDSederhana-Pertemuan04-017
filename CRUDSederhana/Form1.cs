@@ -1,9 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +14,7 @@ using System.Windows.Forms;
 
 namespace CRUDSederhana
 {
-    public partial class Form1: Form
+    public partial class Form1 : Form
     {
         static string connectionString = "Server=127.0.0.1;Database=mahasiswa;Uid=root;Pwd=;";
         public Form1()
@@ -227,6 +230,57 @@ namespace CRUDSederhana
                 {
                     MessageBox.Show("Data tidak ditemukan atau gagal diubah!", "Kesalahan",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Kesalahan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnImportData_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+                PreviewData(filePath);
+            }
+        }
+
+        private void PreviewData(string filePath)
+        {
+            try
+            {
+                using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    IWorkbook workbook = new XSSFWorkbook(fs);
+                    ISheet sheet = workbook.GetSheetAt(0);
+                    DataTable dt = new DataTable();
+
+                    IRow headerRow = sheet.GetRow(0);
+                    foreach (var cell in headerRow.Cells)
+                    {
+                        dt.Columns.Add(cell.ToString());
+                    }
+
+                    for (int i = 1; i <= sheet.LastRowNum; i++)
+                    {
+                        IRow row = sheet.GetRow(i);
+                        DataRow dataRow = dt.NewRow();
+                        int cellIndex = 0;
+                        foreach (var cell in row.Cells)
+                        {
+                            dataRow[cellIndex] = cell.ToString();
+                            cellIndex++;
+                        }
+                        dt.Rows.Add(dataRow);
+                    }
+
+                    PreviewData previewData = new PreviewData(dt);
+                    previewData.ShowDialog();
                 }
             }
             catch (Exception ex)

@@ -30,7 +30,7 @@ namespace CRUDSederhana
             DialogResult result = MessageBox.Show("Apakah anda ingin mengimpor data ini ke database?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                ImportDataToDatabase();x
+                ImportDataToDatabase();
             }
         }
 
