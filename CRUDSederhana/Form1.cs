@@ -42,26 +42,22 @@ namespace CRUDSederhana
             try
             {
                 conn.Open();
-                string query = "SELECT NIM, Nama, Email, Telepon, Alamat " +
-                    "FROM mahasiswa";
-                MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
+                MySqlCommand cmd = new MySqlCommand("GetAllStudents", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
                 dgvMahasiswa.AutoGenerateColumns = true;
                 dgvMahasiswa.DataSource = dt;
 
-                // method ClearForm()
                 ClearForm();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error: " +
-                    ex.Message, "Kesalahan",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                    );
+                MessageBox.Show("Error: " + ex.Message, "Kesalahan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -72,47 +68,40 @@ namespace CRUDSederhana
             {
                 if (txtNIM.Text == "" || txtNama.Text == "" || txtEmail.Text == "" || txtTelepon.Text == "")
                 {
-                    MessageBox.Show(
-                        "Harap isi semua terlebih dahulu", "Peringatan",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning
-                        );
+                    MessageBox.Show("Harap isi semua terlebih dahulu", "Peringatan",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 conn.Open();
-                string query = "INSERT INTO mahasiswa (NIM, Nama, Email, Telepon, Alamat) " +
-                       "VALUES (@NIM, @Nama, @Email, @Telepon, @Alamat)";
+                MySqlCommand cmd = new MySqlCommand("AddStudent", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@NIM", txtNIM.Text);
-                cmd.Parameters.AddWithValue("@Nama", txtNama.Text);
-                cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                cmd.Parameters.AddWithValue("@Telepon", txtTelepon.Text);
-                cmd.Parameters.AddWithValue("@Alamat", txtAlamat.Text);
+                cmd.Parameters.AddWithValue("p_NIM", txtNIM.Text);
+                cmd.Parameters.AddWithValue("p_Nama", txtNama.Text);
+                cmd.Parameters.AddWithValue("p_Email", txtEmail.Text);
+                cmd.Parameters.AddWithValue("p_Telepon", txtTelepon.Text);
+                cmd.Parameters.AddWithValue("p_Alamat", txtAlamat.Text);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 if (rowsAffected > 0)
                 {
-                    MessageBox.Show(
-                        "Data berhasil ditambahkan", "Sukses",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information
-                        );
+                    MessageBox.Show("Data berhasil ditambahkan", "Sukses",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadData();
                     ClearForm();
-                } else
-                {
-                    MessageBox.Show(
-                        "Data tidak berhasil ditambahkan", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error
-                        );
                 }
-            } catch (Exception ex)
+                else
+                {
+                    MessageBox.Show("Data tidak berhasil ditambahkan", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show(
-                        "Error : " + ex.Message, "Kesalahan",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error
-                        );
+                MessageBox.Show("Error : " + ex.Message, "Kesalahan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -122,8 +111,7 @@ namespace CRUDSederhana
             {
                 DialogResult confirm = MessageBox.Show(
                     "Yakin ingin menghapus data ini?", "Konfirmasi",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question
-                    );
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (confirm == DialogResult.Yes)
                 {
@@ -133,43 +121,37 @@ namespace CRUDSederhana
                     {
                         string nim = dgvMahasiswa.SelectedRows[0].Cells["NIM"].Value.ToString();
                         conn.Open();
-                        string query = "DELETE FROM mahasiswa " +
-                            "WHERE NIM = @NIM";
-                        MySqlCommand cmd = new MySqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@NIM", nim);
+
+                        MySqlCommand cmd = new MySqlCommand("DeleteStudent", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("p_NIM", nim);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
 
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show(
-                                "Data berhasil dihapus!", "Sukses",
+                            MessageBox.Show("Data berhasil dihapus!", "Sukses",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                             LoadData();
                             ClearForm();
-                        } else
+                        }
+                        else
                         {
-                            MessageBox.Show(
-                                "Data tidak ditentukan atau gagal dihapus!", "Kesalahan",
+                            MessageBox.Show("Data tidak ditentukan atau gagal dihapus!", "Kesalahan",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-
-                    } catch(Exception ex)
+                    }
+                    catch (Exception ex)
                     {
-                        MessageBox.Show(
-                            "Error : " +
-                            ex.Message, "Kesalahan",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error
-                            );
+                        MessageBox.Show("Error : " + ex.Message, "Kesalahan",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-            } else
+            }
+            else
             {
-                MessageBox.Show(
-                    "Pilih data yang akan dihapus!", "Peringatan",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning
-                    );
+                MessageBox.Show("Pilih data yang akan dihapus!", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -204,10 +186,8 @@ namespace CRUDSederhana
         {
             if (dgvMahasiswa.SelectedRows.Count == 0)
             {
-                MessageBox.Show(
-                    "Pilih data yang akan diubah!", "Peringatan",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning
-                    );
+                MessageBox.Show("Pilih data yang akan diubah!", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -215,81 +195,44 @@ namespace CRUDSederhana
 
             if (txtNama.Text == "" && txtEmail.Text == "" && txtTelepon.Text == "" && txtAlamat.Text == "")
             {
-                MessageBox.Show(
-                    "Tidak ada data yang diubah!", "Peringatan",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning
-                    );
+                MessageBox.Show("Tidak ada data yang diubah!", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            StringBuilder queryBuilder = new StringBuilder("UPDATE mahasiswa SET ");
-            List<MySqlParameter> parameters = new List<MySqlParameter>();
-
-            if (!string.IsNullOrEmpty(txtNama.Text))
-            {
-                queryBuilder.Append("Nama = @Nama, ");
-                parameters.Add(new MySqlParameter("@Nama", txtNama.Text));
-            }
-
-            if (!string.IsNullOrEmpty(txtEmail.Text))
-            {
-                queryBuilder.Append("Email = @Email, ");
-                parameters.Add(new MySqlParameter("@Email", txtEmail.Text));
-            }
-
-            if (!string.IsNullOrEmpty(txtTelepon.Text))
-            {
-                queryBuilder.Append("Telepon = @Telepon, ");
-                parameters.Add(new MySqlParameter("@Telepon", txtTelepon.Text));
-            }
-            
-            if (!string.IsNullOrEmpty(txtAlamat.Text))
-            {
-                queryBuilder.Append("Alamat = @Alamat, ");
-                parameters.Add(new MySqlParameter("@Alamat", txtAlamat.Text));
-            }
-
-            queryBuilder.Remove(queryBuilder.Length - 2, 2);
-
-            queryBuilder.Append(" WHERE NIM = @NIM");
-            parameters.Add(new MySqlParameter("@NIM", nim));
 
             MySqlConnection conn = new MySqlConnection(connectionString);
 
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand(queryBuilder.ToString(), conn);
+                MySqlCommand cmd = new MySqlCommand("UpdateStudent", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                foreach (var param in parameters)
-                {
-                    cmd.Parameters.Add(param);
-                }
+                cmd.Parameters.AddWithValue("p_NIM", nim);
+                cmd.Parameters.AddWithValue("p_Nama", string.IsNullOrEmpty(txtNama.Text) ? null : txtNama.Text);
+                cmd.Parameters.AddWithValue("p_Email", string.IsNullOrEmpty(txtEmail.Text) ? null : txtEmail.Text);
+                cmd.Parameters.AddWithValue("p_Telepon", string.IsNullOrEmpty(txtTelepon.Text) ? null : txtTelepon.Text);
+                cmd.Parameters.AddWithValue("p_Alamat", string.IsNullOrEmpty(txtAlamat.Text) ? null : txtAlamat.Text);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 if (rowsAffected > 0)
                 {
-                    MessageBox.Show(
-                        "Data berhasil diubah", "Sukses",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information
-                        );
+                    MessageBox.Show("Data berhasil diubah", "Sukses",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadData();
                     ClearForm();
-                } else
-                {
-                    MessageBox.Show(
-                        "Data tidak ditemukan atau gagal diubah!", "Kesalahan",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error
-                        );
                 }
-
-            } catch (Exception ex)
+                else
+                {
+                    MessageBox.Show("Data tidak ditemukan atau gagal diubah!", "Kesalahan",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show(
-                   "Error: " + ex.Message, "Kesalahan",
-                   MessageBoxButtons.OK, MessageBoxIcon.Error
-                    );
+                MessageBox.Show("Error: " + ex.Message, "Kesalahan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

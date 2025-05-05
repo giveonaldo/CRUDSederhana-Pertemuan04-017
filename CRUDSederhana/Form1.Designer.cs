@@ -43,13 +43,14 @@
             this.btnUbah = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dgvMahasiswa = new System.Windows.Forms.DataGridView();
+            this.btnImportData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMahasiswa)).BeginInit();
             this.SuspendLayout();
             // 
             // NIM
             // 
             this.NIM.AutoSize = true;
-            this.NIM.Location = new System.Drawing.Point(77, 32);
+            this.NIM.Location = new System.Drawing.Point(29, 32);
             this.NIM.Name = "NIM";
             this.NIM.Size = new System.Drawing.Size(27, 13);
             this.NIM.TabIndex = 0;
@@ -58,7 +59,7 @@
             // Nama
             // 
             this.Nama.AutoSize = true;
-            this.Nama.Location = new System.Drawing.Point(77, 68);
+            this.Nama.Location = new System.Drawing.Point(29, 68);
             this.Nama.Name = "Nama";
             this.Nama.Size = new System.Drawing.Size(35, 13);
             this.Nama.TabIndex = 1;
@@ -67,7 +68,7 @@
             // Email
             // 
             this.Email.AutoSize = true;
-            this.Email.Location = new System.Drawing.Point(77, 114);
+            this.Email.Location = new System.Drawing.Point(29, 114);
             this.Email.Name = "Email";
             this.Email.Size = new System.Drawing.Size(32, 13);
             this.Email.TabIndex = 2;
@@ -76,7 +77,7 @@
             // Telepon
             // 
             this.Telepon.AutoSize = true;
-            this.Telepon.Location = new System.Drawing.Point(77, 161);
+            this.Telepon.Location = new System.Drawing.Point(29, 161);
             this.Telepon.Name = "Telepon";
             this.Telepon.Size = new System.Drawing.Size(46, 13);
             this.Telepon.TabIndex = 3;
@@ -85,7 +86,7 @@
             // Alamat
             // 
             this.Alamat.AutoSize = true;
-            this.Alamat.Location = new System.Drawing.Point(77, 199);
+            this.Alamat.Location = new System.Drawing.Point(29, 199);
             this.Alamat.Name = "Alamat";
             this.Alamat.Size = new System.Drawing.Size(39, 13);
             this.Alamat.TabIndex = 4;
@@ -93,42 +94,42 @@
             // 
             // txtNIM
             // 
-            this.txtNIM.Location = new System.Drawing.Point(157, 32);
+            this.txtNIM.Location = new System.Drawing.Point(93, 34);
             this.txtNIM.Name = "txtNIM";
-            this.txtNIM.Size = new System.Drawing.Size(282, 20);
+            this.txtNIM.Size = new System.Drawing.Size(224, 20);
             this.txtNIM.TabIndex = 5;
             // 
             // txtNama
             // 
-            this.txtNama.Location = new System.Drawing.Point(157, 68);
+            this.txtNama.Location = new System.Drawing.Point(93, 70);
             this.txtNama.Name = "txtNama";
-            this.txtNama.Size = new System.Drawing.Size(282, 20);
+            this.txtNama.Size = new System.Drawing.Size(224, 20);
             this.txtNama.TabIndex = 6;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(157, 114);
+            this.txtEmail.Location = new System.Drawing.Point(93, 116);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(282, 20);
+            this.txtEmail.Size = new System.Drawing.Size(224, 20);
             this.txtEmail.TabIndex = 7;
             // 
             // txtTelepon
             // 
-            this.txtTelepon.Location = new System.Drawing.Point(157, 161);
+            this.txtTelepon.Location = new System.Drawing.Point(93, 163);
             this.txtTelepon.Name = "txtTelepon";
-            this.txtTelepon.Size = new System.Drawing.Size(282, 20);
+            this.txtTelepon.Size = new System.Drawing.Size(224, 20);
             this.txtTelepon.TabIndex = 8;
             // 
             // txtAlamat
             // 
-            this.txtAlamat.Location = new System.Drawing.Point(157, 199);
+            this.txtAlamat.Location = new System.Drawing.Point(93, 201);
             this.txtAlamat.Name = "txtAlamat";
-            this.txtAlamat.Size = new System.Drawing.Size(282, 20);
+            this.txtAlamat.Size = new System.Drawing.Size(224, 20);
             this.txtAlamat.TabIndex = 9;
             // 
             // btnTambah
             // 
-            this.btnTambah.Location = new System.Drawing.Point(491, 32);
+            this.btnTambah.Location = new System.Drawing.Point(32, 269);
             this.btnTambah.Name = "btnTambah";
             this.btnTambah.Size = new System.Drawing.Size(75, 23);
             this.btnTambah.TabIndex = 10;
@@ -138,7 +139,7 @@
             // 
             // btnHapus
             // 
-            this.btnHapus.Location = new System.Drawing.Point(491, 68);
+            this.btnHapus.Location = new System.Drawing.Point(137, 269);
             this.btnHapus.Name = "btnHapus";
             this.btnHapus.Size = new System.Drawing.Size(75, 23);
             this.btnHapus.TabIndex = 11;
@@ -148,7 +149,7 @@
             // 
             // btnUbah
             // 
-            this.btnUbah.Location = new System.Drawing.Point(491, 114);
+            this.btnUbah.Location = new System.Drawing.Point(242, 269);
             this.btnUbah.Name = "btnUbah";
             this.btnUbah.Size = new System.Drawing.Size(75, 23);
             this.btnUbah.TabIndex = 12;
@@ -158,7 +159,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(491, 161);
+            this.btnRefresh.Location = new System.Drawing.Point(32, 314);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnRefresh.TabIndex = 13;
@@ -169,17 +170,27 @@
             // dgvMahasiswa
             // 
             this.dgvMahasiswa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMahasiswa.Location = new System.Drawing.Point(80, 275);
+            this.dgvMahasiswa.Location = new System.Drawing.Point(343, 34);
             this.dgvMahasiswa.Name = "dgvMahasiswa";
-            this.dgvMahasiswa.Size = new System.Drawing.Size(649, 150);
+            this.dgvMahasiswa.Size = new System.Drawing.Size(433, 389);
             this.dgvMahasiswa.TabIndex = 14;
             this.dgvMahasiswa.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMahasiswa_CellContentClick);
+            // 
+            // btnImportData
+            // 
+            this.btnImportData.Location = new System.Drawing.Point(137, 314);
+            this.btnImportData.Name = "btnImportData";
+            this.btnImportData.Size = new System.Drawing.Size(180, 23);
+            this.btnImportData.TabIndex = 15;
+            this.btnImportData.Text = "Import Data";
+            this.btnImportData.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnImportData);
             this.Controls.Add(this.dgvMahasiswa);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnUbah);
@@ -221,6 +232,7 @@
         private System.Windows.Forms.Button btnUbah;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.DataGridView dgvMahasiswa;
+        private System.Windows.Forms.Button btnImportData;
     }
 }
 
