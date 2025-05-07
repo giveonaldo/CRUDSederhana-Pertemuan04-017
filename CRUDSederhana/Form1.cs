@@ -39,7 +39,7 @@ namespace CRUDSederhana
             txtNIM.Focus();
         }
 
-        private void LoadData()
+        public void LoadData()
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
             try

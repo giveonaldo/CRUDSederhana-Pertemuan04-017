@@ -31,6 +31,7 @@ namespace CRUDSederhana
             if (result == DialogResult.Yes)
             {
                 ImportDataToDatabase();
+                this.Close();
             }
         }
 
