@@ -44,6 +44,7 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dgvMahasiswa = new System.Windows.Forms.DataGridView();
             this.btnImportData = new System.Windows.Forms.Button();
+            this.btnAnalisis = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMahasiswa)).BeginInit();
             this.SuspendLayout();
             // 
@@ -186,11 +187,22 @@
             this.btnImportData.UseVisualStyleBackColor = true;
             this.btnImportData.Click += new System.EventHandler(this.btnImportData_Click);
             // 
+            // btnAnalisis
+            // 
+            this.btnAnalisis.Location = new System.Drawing.Point(32, 354);
+            this.btnAnalisis.Name = "btnAnalisis";
+            this.btnAnalisis.Size = new System.Drawing.Size(285, 23);
+            this.btnAnalisis.TabIndex = 16;
+            this.btnAnalisis.Text = "Analisis";
+            this.btnAnalisis.UseVisualStyleBackColor = true;
+            this.btnAnalisis.Click += new System.EventHandler(this.btnAnalisis_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAnalisis);
             this.Controls.Add(this.btnImportData);
             this.Controls.Add(this.dgvMahasiswa);
             this.Controls.Add(this.btnRefresh);
@@ -234,6 +246,7 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.DataGridView dgvMahasiswa;
         private System.Windows.Forms.Button btnImportData;
+        private System.Windows.Forms.Button btnAnalisis;
     }
 }
 

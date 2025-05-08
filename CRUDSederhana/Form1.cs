@@ -289,5 +289,10 @@ namespace CRUDSederhana
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnAnalisis_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
